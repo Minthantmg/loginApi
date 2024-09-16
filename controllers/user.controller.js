@@ -19,7 +19,30 @@ const createUser = async (req, res) => {
   }
 };
 
+const login = async (req, res) => {
+  const userData = req.body;
+  try {
+    const response = await User.findOne({
+      name: userData.username,
+      password: userData.password,
+    });
+
+    if (response) {
+      res.send({
+        message: "Authentication Successful",
+        statusCode: 200,
+        data: response,
+      });
+      res.status(401).json({ message: "Authentication Failed" });
+    }
+  } catch (error) {
+    logger.error("Error occured when logging in", error);
+    throw error;
+  }
+};
+
 module.exports = {
   getUsers,
   createUser,
+  login,
 };
