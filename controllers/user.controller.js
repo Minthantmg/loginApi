@@ -33,7 +33,7 @@ const login = async (req, res) => {
         statusCode: 200,
         data: response,
       });
-      res.status(401).json({ message: "Authentication Failed" });
+      res.send({ message: "Authentication Failed", statusCode: 401 });
     }
   } catch (error) {
     logger.error("Error occured when logging in", error);
