@@ -3,13 +3,14 @@ const logger = require("./Config/logger");
 const connectDB = require("./Db/mongo");
 const mongoose = require("mongoose");
 const userRouter = require("./routes/user.route");
+const corsMiddleware = require("./Middlewares/cors");
 const app = express();
-const User = require("./models/User");
 
 connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(corsMiddleware);
 
 app.use("/api/v1", userRouter);
 
