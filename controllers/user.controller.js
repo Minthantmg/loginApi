@@ -24,7 +24,7 @@ const login = async (req, res) => {
   const userData = req.body;
   try {
     const response = await User.findOne({
-      name: userData.username,
+      email: userData.email,
       password: userData.password,
     });
 
