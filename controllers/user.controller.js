@@ -1,3 +1,4 @@
+const logger = require("../Config/logger");
 const User = require("../models/User");
 const mongoose = require("mongoose");
 
@@ -33,11 +34,12 @@ const login = async (req, res) => {
         statusCode: 200,
         data: response,
       });
-      res.send({ message: "Authentication Failed", statusCode: 401 });
+    } else {
+      res.status(401).send({ message: "Authentication Failed" });
     }
   } catch (error) {
-    logger.error("Error occured when logging in", error);
-    throw error;
+    logger.error("Error occurred when logging in", error);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 };
 
