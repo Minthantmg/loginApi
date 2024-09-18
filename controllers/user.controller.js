@@ -38,7 +38,6 @@ const login = async (req, res) => {
       res.status(401).send({ message: "Authentication Failed" });
     }
   } catch (error) {
-    logger.error("Error occurred when logging in", error);
     res.status(500).send({ message: "Internal Server Error" });
   }
 };
